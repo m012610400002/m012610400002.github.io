@@ -149,20 +149,8 @@ Posición 5: Descripción detallada del procedimiento técnico
 {% for fila in lista_pasos %}
   {% assign info = fila | strip | split: "|" %}
   {% if info.size > 1 %}
-    <div class="paso-contenedor" style="margin-bottom: 40px; padding: 20px; border-left: 4px solid #28a745; background-color: #f9f9f9;">
-      <h3>Paso {{ info[0] }}: {{ info[1] }}</h3>
-      <p style="color: #666; font-size: 0.9em; margin-top: -5px;">
-        <strong>Fecha:</strong> {{ info[3] }} | <strong>Fase ATT&CK:</strong> {{ info[4] }}
-      </p>
-      
-      <div class="imagen-wrapper" style="margin: 15px 0; background: #eaeaea; text-align: center; padding: 10px; border-radius: 4px;">
-        <img src="{{ '/assets/img/' | append: info[2] | relative_url }}" alt="Captura del Paso {{ info[0] }}" style="max-width: 100%; height: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-      </div>
-
-      <div class="descripcion-paso" style="line-height: 1.6; color: #333; background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
-        <strong>Detalle Técnico de la Ejecución:</strong><br>
-        {{ info[5] }}
-      </div>
+    <div class="imagen-wrapper" style="margin: 20px 0; text-align: center;">
+      <img src="{{ '/assets/img/' | append: info[2] | relative_url }}" alt="Captura del Paso {{ info[0] }}" style="max-width: 100%; height: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
     </div>
   {% endif %}
 {% endfor %}
