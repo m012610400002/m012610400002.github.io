@@ -50,7 +50,7 @@ El siguiente informe documenta el desarrollo del examen final, estructurado en c
 | **Hashes e IPs de C2** | Táctico | Infraestructura | Datos volátiles consumibles directamente por reglas defensivas (YARA/IOCs). |
 
 > **Manejo de TLP si la etiqueta es NONE:**
-> Si un IoC en OpenCTI o en un feed de inteligencia se registra con `TLP:NONE` (o sin etiqueta TLP previa), el **Analista de CTI** o la dirección del **SOC/CISO** de la organización receptora debe ser quien fije la política de clasificación. Esto se debe a que la organización que consume el dato debe determinar la sensibilidad de la fuente, el riesgo de exposición pública de sus propios activos al compartir la amenaza, y estandarizar la información por defecto bajo una clasificación prudente (frecuentemente `TLP:AMBER` internamente o `TLP:CLEAR` si el IoC es de dominio público comprobado).
+> Si un IoC en OpenCTI o en un feed de inteligencia se registra con `TLP:NONE` (o sin etiqueta TLP previa), el nosotros como analistas o la dirección del SOC/CISO de la organización receptora debe ser quien fije la política de clasificación. Es por ello que recurriemos a la busqueda de antecedentes en  MITRE ATT&C o similar.
 
 ---
 
@@ -79,47 +79,22 @@ El siguiente informe documenta el desarrollo del examen final, estructurado en c
 
 A continuación se detalla el análisis cronológico y ejecución del ataque sobre Metasploitable3, ordenado por fases de la kill chain.
 
-<div class="tutorial-steps">
-{%- comment -%}
-Estructura de datos (separada por '|'):
-Posición 0: Número de paso
-Posición 1: Título legible del paso
-Posición 2: Nombre exacto de la imagen en /assets/img/
-Posición 3: Fecha (DD/MM/YYYY)
-Posición 4: Fase ATT&CK / Táctica
-Posición 5: Descripción detallada del procedimiento técnico
-{%- endcomment -%}
-{%- capture datos_pasos -%}
-1|Reconocimiento de Red|examen1.png|15/08/2026|Reconocimiento [T1018]|Escaneo de puertos e identificación del servicio SMB en la IP de Metasploitable3.
-2|Acceso Inicial por SMB|examen2.png|15/08/2026|Acceso Inicial [T1021.002]|Explotación del servicio SMB utilizando psexec.py para obtener una consola remota.
-3|Ejecución en PowerShell|examen3 entrando a knowledge.png|15/08/2026|Ejecución [T1059.001]|Ejecución de payload interactivo en PowerShell evitando la escritura en disco.
-4|Escalada de Privilegios|examen4 vemos en el tiempo.png|15/08/2026|Escalada de Privilegios [T1543.003]|Creación de un servicio malicioso de Windows para elevación a NT AUTHORITY\SYSTEM.
-5|Obtención de Control Total|examen5 malwares.png|15/08/2026|Demostración de Control [T1078]|Obtención de privilegio máximo con getsystem y volcado de hashes SAM.
-{%- endcapture -%}
+### 3.1 Fases de Ejecución
 
-{%- assign lista_pasos = datos_pasos | newline_to_br | split: "<br />" -%}
+**Paso 1: Reconocimiento de Red** (15/08/2026 | Reconocimiento [T1018])
+- Escaneo de puertos e identificación del servicio SMB en la IP de Metasploitable3.
 
-{% for fila in lista_pasos %}
-  {% assign info = fila | strip | split: "|" %}
-  {% if info.size > 1 %}
-    <div class="paso-contenedor" style="margin-bottom: 40px; padding: 20px; border-left: 4px solid #007acc; background-color: #f9f9f9;">
-      <h3>Paso {{ info[0] }}: {{ info[1] }}</h3>
-      <p style="color: #666; font-size: 0.9em; margin-top: -5px;">
-        <strong>Fecha:</strong> {{ info[3] }} | <strong>Fase ATT&CK:</strong> {{ info[4] }}
-      </p>
-      
-      <div class="imagen-wrapper" style="margin: 15px 0; background: #eaeaea; text-align: center; padding: 10px; border-radius: 4px;">
-        <img src="{{ '/assets/img/' | append: info[2] | relative_url }}" alt="Captura del Paso {{ info[0] }}" style="max-width: 100%; height: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-      </div>
+**Paso 2: Acceso Inicial por SMB** (15/08/2026 | Acceso Inicial [T1021.002])
+- Explotación del servicio SMB utilizando psexec.py para obtener una consola remota.
 
-      <div class="descripcion-paso" style="line-height: 1.6; color: #333; background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
-        <strong>Detalle Técnico de la Ejecución:</strong><br>
-        {{ info[5] }}
-      </div>
-    </div>
-  {% endif %}
-{% endfor %}
-</div>
+**Paso 3: Ejecución en PowerShell** (15/08/2026 | Ejecución [T1059.001])
+- Ejecución de payload interactivo en PowerShell evitando la escritura en disco.
+
+**Paso 4: Escalada de Privilegios** (15/08/2026 | Escalada de Privilegios [T1543.003])
+- Creación de un servicio malicioso de Windows para elevación a NT AUTHORITY\SYSTEM.
+
+**Paso 5: Obtención de Control Total** (15/08/2026 | Demostración de Control [T1078])
+- Obtención de privilegio máximo con getsystem y volcado de hashes SAM.
 
 ---
 
@@ -146,3 +121,49 @@ Posición 5: Descripción detallada del procedimiento técnico
 
 ### Conclusión
 El ejercicio permitió validar el proceso de de operaciones ofensivas y defensivas aplicando tecnicas y subtecnicas , asi como el proceso en la linea del tiempo. Todo ello recurriendo a hermaientas desplegadas en docker como OpenCTI
+
+---
+
+## Anexo — Evidencia Fotográfica
+
+<div class="galeria-evidencia">
+{%- comment -%}
+Estructura de datos (separada por '|'):
+Posición 0: Número de paso
+Posición 1: Título legible del paso
+Posición 2: Nombre exacto de la imagen en /assets/img/
+Posición 3: Fecha (DD/MM/YYYY)
+Posición 4: Fase ATT&CK / Táctica
+Posición 5: Descripción detallada del procedimiento técnico
+{%- endcomment -%}
+{%- capture datos_pasos -%}
+1|Reconocimiento de Red|examen1.png|15/08/2026|Reconocimiento [T1018]|Escaneo de puertos e identificación del servicio SMB en la IP de Metasploitable3.
+2|Acceso Inicial por SMB|examen2.png|15/08/2026|Acceso Inicial [T1021.002]|Explotación del servicio SMB utilizando psexec.py para obtener una consola remota.
+3|Ejecución en PowerShell|examen3 entrando a knowledge.png|15/08/2026|Ejecución [T1059.001]|Ejecución de payload interactivo en PowerShell evitando la escritura en disco.
+4|Escalada de Privilegios|examen4 vemos en el tiempo.png|15/08/2026|Escalada de Privilegios [T1543.003]|Creación de un servicio malicioso de Windows para elevación a NT AUTHORITY\SYSTEM.
+5|Obtención de Control Total|examen5 malwares.png|15/08/2026|Demostración de Control [T1078]|Obtención de privilegio máximo con getsystem y volcado de hashes SAM.
+{%- endcapture -%}
+
+{%- assign lista_pasos = datos_pasos | newline_to_br | split: "<br />" -%}
+
+{% for fila in lista_pasos %}
+  {% assign info = fila | strip | split: "|" %}
+  {% if info.size > 1 %}
+    <div class="paso-contenedor" style="margin-bottom: 40px; padding: 20px; border-left: 4px solid #28a745; background-color: #f9f9f9;">
+      <h3>Paso {{ info[0] }}: {{ info[1] }}</h3>
+      <p style="color: #666; font-size: 0.9em; margin-top: -5px;">
+        <strong>Fecha:</strong> {{ info[3] }} | <strong>Fase ATT&CK:</strong> {{ info[4] }}
+      </p>
+      
+      <div class="imagen-wrapper" style="margin: 15px 0; background: #eaeaea; text-align: center; padding: 10px; border-radius: 4px;">
+        <img src="{{ '/assets/img/' | append: info[2] | relative_url }}" alt="Captura del Paso {{ info[0] }}" style="max-width: 100%; height: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+      </div>
+
+      <div class="descripcion-paso" style="line-height: 1.6; color: #333; background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 4px;">
+        <strong>Detalle Técnico de la Ejecución:</strong><br>
+        {{ info[5] }}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+</div>
