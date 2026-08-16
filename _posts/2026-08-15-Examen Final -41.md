@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: "Examen Final — APT41"
 date: 2026-08-15 10:00:00 -0500
@@ -90,11 +90,11 @@ Posición 4: Fase ATT&CK / Táctica
 Posición 5: Descripción detallada del procedimiento técnico
 {%- endcomment -%}
 {%- capture datos_pasos -%}
-1|Reconocimiento de Red|apt41_recon.png|15/08/2026|Reconocimiento [T1018]|Escaneo de puertos e identificación del servicio SMB en la IP de Metasploitable3.
-2|Acceso Inicial por SMB|apt41_initial_access.png|15/08/2026|Acceso Inicial [T1021.002]|Explotación del servicio SMB utilizando psexec.py para obtener una consola remota.
-3|Ejecución en PowerShell|apt41_execution_powershell.png|15/08/2026|Ejecución [T1059.001]|Ejecución de payload interactivo en PowerShell evitando la escritura en disco.
-4|Escalada de Privilegios|apt41_priv_esc.png|15/08/2026|Escalada de Privilegios [T1543.003]|Creación de un servicio malicioso de Windows para elevación a NT AUTHORITY\SYSTEM.
-5|Obtención de Control Total|apt41_getsystem.png|15/08/2026|Demostración de Control [T1078]|Obtención de privilegio máximo con getsystem y volcado de hashes SAM.
+1|Reconocimiento de Red|examen1.png|15/08/2026|Reconocimiento [T1018]|Escaneo de puertos e identificación del servicio SMB en la IP de Metasploitable3.
+2|Acceso Inicial por SMB|examen2.png|15/08/2026|Acceso Inicial [T1021.002]|Explotación del servicio SMB utilizando psexec.py para obtener una consola remota.
+3|Ejecución en PowerShell|examen3 entrando a knowledge.png|15/08/2026|Ejecución [T1059.001]|Ejecución de payload interactivo en PowerShell evitando la escritura en disco.
+4|Escalada de Privilegios|examen4 vemos en el tiempo.png|15/08/2026|Escalada de Privilegios [T1543.003]|Creación de un servicio malicioso de Windows para elevación a NT AUTHORITY\SYSTEM.
+5|Obtención de Control Total|examen5 malwares.png|15/08/2026|Demostración de Control [T1078]|Obtención de privilegio máximo con getsystem y volcado de hashes SAM.
 {%- endcapture -%}
 
 {%- assign lista_pasos = datos_pasos | newline_to_br | split: "<br />" -%}
@@ -144,5 +144,5 @@ Posición 5: Descripción detallada del procedimiento técnico
 
 ---
 
-### Conclusión personal
-De lo revisado me permitio acercarme a conocimientos de despliegue de plaaformas en docker, analizar del proceso  walware utilizados y subtecnicas en general de mitre attack
+### Conclusión
+El ejercicio permitió validar el proceso de de operaciones ofensivas y defensivas aplicando tecnicas y subtecnicas , asi como el proceso en la linea del tiempo. Todo ello recurriendo a hermaientas desplegadas en docker como OpenCTI
